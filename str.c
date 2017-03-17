@@ -6,7 +6,7 @@
 
 void reverse_str(char *str, int len)
 {
-  #if 1
+#if 1
   int i, j;
   char ch;
 
@@ -15,9 +15,9 @@ void reverse_str(char *str, int len)
     str[i] = str[j];
     str[j] = ch;
   }
-  #endif
+#endif
 
-  #if 0
+#if 0
   char *end = str + len - 1;
   char ch;
 
@@ -26,7 +26,7 @@ void reverse_str(char *str, int len)
     *str++ = *end;
     *end-- = ch;
   }
-  #endif
+#endif
 }
 
 void reverse_words_in_str(char *str)
