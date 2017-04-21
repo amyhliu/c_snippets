@@ -78,22 +78,31 @@ void print_tree(struct Node *root)
 {
   if (!root) return;
 
-  /* in order */
+#if 0
+  /* in-order (left, root, right) */
   if (root->left) print_tree(root->left);
   printf("%d ", root->data);
   if (root->right) print_tree(root->right);
-  
-  /* post order */
-  /*
-  if (root->right) print_tree(root->right);
+#endif
+
+#if 0
+  /* pre-order (root, left, right) */
   printf("%d ", root->data);
   if (root->left) print_tree(root->left);
-  */
+  if (root->right) print_tree(root->right);
+#endif
+
+#if 1
+  /* post-order (left, right, root) */
+  if (root->left) print_tree(root->left);
+  if (root->right) print_tree(root->right);
+  printf("%d ", root->data);
+#endif
 }
 
 int main(void)
 {
-  int arr[10] = {5, 6, 4, 9, 3, 2, 7, 8, 10, 1};
+  int arr[] = {3, 4, 2, 1, 5};
   struct Node *root = NULL;
 
   root = create_tree(arr, sizeof(arr)/sizeof(int));
