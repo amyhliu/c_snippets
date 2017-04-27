@@ -80,11 +80,12 @@ void delete_node(struct Node **head, int data)
       if (curr->data == data) {
 	prev->next = curr->next;
 	free(curr);
+	curr = prev->next;
       }
       else {
 	prev = curr;
+	curr = curr->next;
       }
-      curr = curr->next;
     }
   }
 }
@@ -169,7 +170,7 @@ void print_llist(struct Node *head)
 
 int main(void)
 {
-  int myarr[] = {2, 2, 5, 2, 4, 7};
+  int myarr[] = {2, 2, 5, 2, 2, 4, 7, 2};
   struct Node *head = NULL;
 
   head = create_llist(myarr, sizeof(myarr)/sizeof(int));
