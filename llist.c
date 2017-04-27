@@ -55,6 +55,8 @@ void insert_node(struct Node **head, int data)
   }
 }
 
+// This function deletes all the nodes whose data is equal to the passed
+// in data.
 void delete_node(struct Node **head, int data)
 {
   struct Node *tmp;
@@ -63,24 +65,27 @@ void delete_node(struct Node **head, int data)
 
   if (!(*head)) return;
 
-  // delete first node
-  if ((*head)->data == data) {
-    tmp = (*head)->next;
+  // Check if head needs to be deleted
+  while ((*head) && ((*head)->data == data)) {
+  tmp = (*head)->next;
     free(*head);
     *head = tmp;
   }
-  
-  prev = *head;
-  curr = (*head)->next;
-  while (curr) {
-    if (curr->data == data) {
-      prev->next = curr->next;
-      free(curr);
+
+  // Head's data is different from the passed in data
+  if ((*head) && ((*head)->next)) {
+    prev = *head;
+    curr = (*head)->next;
+    while (curr) {
+      if (curr->data == data) {
+	prev->next = curr->next;
+	free(curr);
+      }
+      else {
+	prev = curr;
+      }
+      curr = curr->next;
     }
-    else {
-      prev = curr;
-    }
-    curr = curr->next;
   }
 }
 
@@ -164,10 +169,13 @@ void print_llist(struct Node *head)
 
 int main(void)
 {
-  int myarr[2] = {2, 5};
+  int myarr[] = {2, 2, 5, 2, 4, 7};
   struct Node *head = NULL;
 
   head = create_llist(myarr, sizeof(myarr)/sizeof(int));
+  print_llist(head);
+
+  delete_node(&head, 2);
   print_llist(head);
 
   reverse_llist(&head);
@@ -182,6 +190,7 @@ int main(void)
   insert_node(&head, 1);
   insert_node(&head, 1);
   print_llist(head);
+
   
   delete_llist(&head);
   print_llist(head);
