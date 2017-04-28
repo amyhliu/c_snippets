@@ -67,7 +67,7 @@ void delete_node(struct Node **head, int data)
 
   // Check if head needs to be deleted
   while ((*head) && ((*head)->data == data)) {
-  tmp = (*head)->next;
+    tmp = (*head)->next;
     free(*head);
     *head = tmp;
   }
