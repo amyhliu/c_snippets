@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 
 struct Node {
@@ -143,6 +144,74 @@ void sort_llist(struct Node *head)
   }
 }
 
+int length(struct Node *head)
+{
+  int count = 0;
+
+  while (head) {
+    count++;
+    head = head->next;
+  }
+
+  return count;
+}
+
+int count(struct Node *head, int data)
+{
+  int count = 0;
+  
+  while (head) {
+    if (head->data == data) {
+      count++;
+    }
+    head = head->next;
+  }
+
+  return count;
+}
+
+int getNth(struct Node *head, int index)
+{
+  int i = 0;
+  int len = length(head);
+
+  assert(head);
+  assert((index >= 0) && (index < len));
+
+  // Check index validity
+  
+  while (i < index) {
+    head = head->next;
+    ++i;
+  }
+
+  return head->data;
+}
+
+void push(struct Node **head, int data)
+{
+  struct Node *tmp;
+
+  tmp = (struct Node *)malloc(sizeof(struct Node));
+  tmp->data = data;
+  tmp->next = *head;
+  *head = tmp;
+}
+
+int pop(struct Node **head)
+{
+  int data = (*head)->data;
+  struct Node *tmp;
+
+  assert(*head);
+  
+  tmp = *head;
+  *head = (*head)->next;
+  free(tmp);
+
+  return data;
+}
+
 void delete_llist(struct Node **head)
 {
   struct Node *tmp;
@@ -189,10 +258,15 @@ int main(void)
   print_llist(head);
 
   insert_node(&head, 1);
-  insert_node(&head, 1);
+  //  insert_node(&head, 1);
   print_llist(head);
 
-  
+  printf("The 4th data: %d\n", getNth(head, 2));
+
+  printf("Popped: %d\n", pop(&head));
+  printf("Popped: %d\n", pop(&head));
+  print_llist(head);
+
   delete_llist(&head);
   print_llist(head);
 
