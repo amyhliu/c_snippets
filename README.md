@@ -1,3 +1,3 @@
 # c_snippets
 
-Add information here
+C code snippets
