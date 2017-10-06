@@ -1,39 +1,33 @@
 // Compute factoral
-
 #include <stdio.h>
 
-
-int factoral(int n)
+unsigned int factoral(unsigned int n)
 {
 #if 1
-  // Recursive
-  if (n == 0) return 1;
-  
-  return n * factoral(n-1);
-#endif
+	// Recursive
+	if (n == 0) return 1;
+	return n * factoral(n-1);
 
-#if 0
-  // Non-recursive
-  int i;
-  int ret = 1;
+#else
+	// Non-recursive
+	unsigned int ret = 1; // 0! = 1, 1! = 1
 
-  if (n == 0) return 1;
-  
-  for (i = 1; i <= n; i++) {
-      ret = ret * i;
-  }
+	while (n > 1) {
+		ret *= n;
+		n--;
+	}
 
-  return ret;
+	return ret;
 #endif
 }
 
 int main(void)
 {
-  int i;
+	int i;
+	
+	for (i = 0; i < 7; i++) {
+		printf("%d\n", factoral(i));
+	}
 
-  for (i = 0; i < 7; i++) {
-    printf("%d\n", factoral(i));
-  }
-
-  return 0;
+	return 0;
 }
