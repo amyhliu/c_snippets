@@ -1,78 +1,75 @@
 // Bitwise operations
-
 #include <stdio.h>
-
 
 #define set_bit(x, n) (x |= (1 << n))
 #define clr_bit(x, n) (x &= ~(1 << n))
 
 void swap_int(int *a, int *b)
 {
-  *a = *a ^ *b;
-  *b = *a ^ *b; // *a ^ *b ^ *a = *b
-  *a = *a ^ *b; // *a ^ *b ^ *b = *a
+	*a = *a ^ *b;
+	*b = *a ^ *b; // *a ^ *b ^ *a = *b
+	*a = *a ^ *b; // *a ^ *b ^ *b = *a
 }
 
 // a is unsigned, so 0 is filled when a right shifts.
 int count_set_bits(unsigned int a)
 {
-  int count = 0;
-  
-  while (a) {
-    if (a & 1) {
-      count++;
-    }
+	int count = 0;
 
-    a >>= 1;
-  }
-  
-  return count;
+	while (a) {
+		if (a & 1) {
+			count++;
+		}
+		a >>= 1;
+	}
+
+	return count;
 }
 
 int is_power_of_two(int x)
 {
-  return ((x & (x - 1)) == 0);
+	return ((x & (x - 1)) == 0);
 }
 
 // Use shift to implement multiplication
 unsigned short shift_mul(unsigned char a, unsigned char b)
 {
-  unsigned short result = 0;
+	unsigned short result = 0;
 
-  while (a) {
-    if (a & 1) {
-      result += b;
-    }
+	while (a) {
+		if (a & 1) {
+			result += b;
+		}
 
-    a >>= 1;
-    b <<= 1;
-  }
+		a >>= 1;
+		b <<= 1;
+	}
 
-  return result;
+	return result;
 }
 
 int main(void)
 {
-  int x = 0;
-  
-  set_bit(x, 2);
-  printf("%x\n", x);
+	int x = 0;
 
-  clr_bit(x, 2);
-  printf("%x\n", x);
+	set_bit(x, 2);
+	printf("%x\n", x);
 
-  int a = 1, b = 2;
-  swap_int(&a, &b);
-  printf("a: %d, b: %d\n", a, b);
+	clr_bit(x, 2);
+	printf("%x\n", x);
 
-  a = 0xffffffff;
-  printf("0x%x has %d set bits\n", a, count_set_bits(a));
+	int a = 1, b = 2;
+	swap_int(&a, &b);
+	printf("a: %d, b: %d\n", a, b);
 
-  x = 9;
-  printf("%d is power of 2: %d?\n", x, is_power_of_two(x));
+	a = 0xffffffff;
+	printf("0x%x has %d set bits\n", a, count_set_bits(a));
 
-  a = 7;
-  b = 11;
-  printf("%d x %d is %d\n", a, b, shift_mul(a, b));
-  return 0;
+	x = 9;
+	printf("Is %d power of 2?: %d\n", x, is_power_of_two(x));
+
+	a = 7;
+	b = 11;
+	printf("%d x %d is %d\n", a, b, shift_mul(a, b));
+	return 0;
 }
