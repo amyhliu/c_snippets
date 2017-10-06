@@ -66,5 +66,5 @@ int main(void)
 	printf("Reversed string: \n");
 	printf("%s, length: %zd\n", mystr, strlen(mystr));
 
-  return 0;
+	return 0;
 }
