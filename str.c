@@ -26,7 +26,7 @@ void reverse_str(char *str, int len)
 }
 
 
-char* skip_space(char **p)
+char *skip_space(char **p)
 {
 	while (**p == ' ') {
 		(*p)++;
