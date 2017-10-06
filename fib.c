@@ -76,6 +76,6 @@ int main(void)
 
 	printf("%d\n", fib(10));
 
-  return 0;
+	return 0;
 }
   
