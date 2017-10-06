@@ -40,7 +40,6 @@ unsigned short shift_mul(unsigned char a, unsigned char b)
 		if (a & 1) {
 			result += b;
 		}
-
 		a >>= 1;
 		b <<= 1;
 	}
